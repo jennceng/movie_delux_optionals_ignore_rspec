@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>News Summary</title>
+  </head>
+
+  <body>
+    <h1>
+      Movies:
+    </h1>
+    <ul>
+      <li><a href=/movies/?order=year>Order By Year</a></li>
+      <li><a href=/movies/?order=rating>Order By Rating</a></li>
+      <% if @page %>
+
+        <li><a href=/movies/?page=<%=@page + 1%>>Next Page</a></li>
+      <% end %>
+      <% if @page > 1 %>
+        <li><a href=/movies/?page=<%=@page - 1%>>Previous Page</a></li>
+      <% end %>
+    </ul>
+  <form action="/movies/" method="get">
+    <label for="search">Search:</label>
+    <input type="text" id="search" name="search">
+    <input type="submit">
+  </form>
+
+    <ul>
+      <% @movies.each do |movie| %>
+      <li><a href=/movies/<%= movie["id"] %> ><%= movie["title"] %></a>
+        Year Released: <%= movie["year"] %>
+        Rating: <%= movie["rating"] %>
+        Genre: <%= movie["genre"]%>
+        Studio: <%=  movie["studio"]  %>
+      </li>
+      <% end %>
+    </ul>
+
+  </body>
+</html>
